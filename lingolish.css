@@ -1,0 +1,146 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+header h2{
+    background-color: indianred;
+    color: white;
+    margin: 0;
+    padding: 12px;
+    text-align: center;
+}
+main{
+    position: relative;
+}
+.main-cover{
+    position: absolute;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
+    padding: 20px;
+    top: -30px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: 0.4s;
+}
+.main-cover h4{
+    text-align: center;
+    margin: 30px auto;
+    color: #fff;
+    font-size: xx-large;
+    word-spacing: 5px;
+    letter-spacing: 4px;
+    font-family: monospace;
+
+}
+.mainCoverHidden{
+    opacity: 0;
+    z-index: 0;
+}
+#keyboard{
+    margin: 0 auto;
+    text-align: center;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+.keys{
+    display: inline-block;
+    background: #000;
+    color : white;
+    margin: 4px 0px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    text-align: center;
+    transition: 0.3s;
+    padding: 10px 1px 0 1px;
+    border-radius: 8px;
+}
+.blureKeys{
+    filter: blur(1px);
+}
+.keysAnime{
+    transform:  translate3d(0px, 0px, 0px) rotate3d(1, 0, 0, 30deg) scaleY(1);
+    box-shadow: 0px -4px 6px -2px rgb(0 0 0 / 60%);}
+#inputs{
+    margin: 30px auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.input{
+    width: 50px;
+    height: 50px;
+    border: 1px solid sandybrown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    border-radius: 6px;
+    box-shadow: -3px 5px 5px 0px rgb(0 0 0 / 40%);
+}
+#guessBox{
+    display: flex;
+    justify-content: space-between;
+    margin : 32px 0px;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    border: 1px solid sandybrown;
+    margin-top: 12px;
+}
+li{
+    padding: 8px 0;
+    border-top: 1px solid sandybrown;
+}
+.user-guesse{
+    color : mediumseagreen
+}
+.computer-guesse{
+    color : red
+}
+
+.form-Box{
+    display: flex;
+    justify-content: space-around;
+    background-color: lightcoral;
+    height: 120px;
+    align-items: center;
+}
+.input-group{
+    margin : 0 12px;
+    color : white;
+}
+input[type=radio]{
+    color:  white;
+}
+.radioButtonDisabled {
+    color: greenyellow;
+    text-decoration: underline;
+}
+#winner-modal{
+    position: absolute;
+    height: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 2;
+    transition: 0.7s;
+}
+#winner-message{
+    height: 0px;
+    width: 90%;
+    background: white;
+    margin: 18% auto;
+}
+
+@media screen and (min-width : 768px){
+    .keys{
+        width: 45px;
+    }
+    #guessBox{
+        margin : 32px 18px;
+    }
+}

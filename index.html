@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./lingolish.css" rel="stylesheet" />
+    <title>lingolish</title>
+</head>
+<body>
+    <div id="winner-modal">
+        <div id="winner-message"><h3 style="text-align: center;margin-top: 25px;"></h3><h5 style="text-align: center; margin-top: 16px;"></h5></div>
+    </div>
+    <header>
+        <h2>SELCET  GAME  LEVEL</h2>
+        <div class="form-Box">
+            <div class="input-group">
+                <input id="easy" type="radio" name="Level" value="EASY"  />
+                <label for="easy">EASY</label>
+            </div>
+            <div class="input-group">
+                <input id="normal" type="radio" name="Level" value="NORMAL" />
+                <label for="NORMAL">NORMAL</label>
+            </div>
+            <div class="input-group">
+                <input id="hard" type="radio" name="Level" value="HARD" />
+                <label for="HARD">HARD</label>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="main-cover"><h4>SELECT LEVEL</h4></div>
+        <div id="inputs">
+            <span data-value=""  data-index="0" class="input"></span>
+            <span data-value=""  data-index="1" class="input"></span>
+            <span data-value=""  data-index="2" class="input"></span>
+            <span data-value=""  data-index="3" class="input"></span>
+            <span data-value=""  data-index="4" class="input"></span>
+        </div>
+        <div id="keyboard">
+            <div class="keys">Q</div>
+            <div class="keys">W</div>
+            <div class="keys">E</div>
+            <div class="keys">R</div>
+            <div class="keys">T</div>
+            <div class="keys">Y</div>
+            <div class="keys">U</div>
+            <div class="keys">I</div>
+            <div class="keys">O</div>
+            <div class="keys">P</div>
+            <br />
+            <div class="keys">A</div>
+            <div class="keys">S</div>
+            <div class="keys">D</div>
+            <div class="keys">F</div>
+            <div class="keys">G</div>
+            <div class="keys">H</div>
+            <div class="keys">J</div>
+            <div class="keys">K</div>
+            <div class="keys">L</div>
+            <br />
+            <div class="keys">Z</div>
+            <div class="keys">X</div>
+            <div class="keys">C</div>
+            <div class="keys">V</div>
+            <div class="keys">B</div>
+            <div class="keys">N</div>
+            <div class="keys">M</div>
+        </div>
+    
+        <div id="guessBox">
+            <div id="userGuess"><h4>USER GUESSE</h4><ul></ul></div>
+            <div id="computerGuess"><h4>COMPUTER GUESSE</h4><ul></ul></div>
+        </div>
+    </main>
+
+    
+       <script type="module" src="./lingolish.js"> </script>
+</body>
+</html>
