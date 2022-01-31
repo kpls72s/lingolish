@@ -27,7 +27,6 @@ radioButtons.forEach((element) =>
     }
   })
 );
-// --------------- Reset All States ------------------ //
 
 // ---------------  Select Random Word --------------------//
 randomString = randomWord();
@@ -56,7 +55,6 @@ deleteButton.addEventListener("click", (e) => {
   while (i >= 0) {
     i--;
     if (inputs[i - 1].dataset.value !== "") {
-      console.log(inputs[i - 1]);
       inputs[i - 1].innerHTML = "";
       inputs[i - 1].dataset.value = "";
       userSelects.pop();
@@ -67,13 +65,6 @@ deleteButton.addEventListener("click", (e) => {
 
 // ---------------- Reset Inputs ------------------------------ //
 function fillInput() {
-  // for (let i = 0; i < userCorrectSelect.length; i++) {
-  //   inputs[i].style.color = "";
-  //   inputs[i].dataset.value = "";
-  //   inputs[i].innerHTML = userCorrectSelect[i];
-  //   userCorrectSelect[i] !== "" &&
-  //     (inputs[i].style.color = "rgba(217, 164, 31,0.3)");
-  // }
   for(let i=0 ; i < inputs.length ; i++){
     inputs[i].dataset.value = "";
     inputs[i].style.color = "";
@@ -85,37 +76,20 @@ function fillInput() {
 // ---------------- Enter User Selection In Inputs ----------------------- //
 
 function setInput(letter) {
+
   Player === "user" && userTurn();
 
   function userTurn() {
-    // let regex = new RegExp(letter, "ig");
     for (let i = 0; i < inputs.length; i++) {
       if (inputs[i].dataset.value === "") {
         inputs[i].dataset.value = letter;
         inputs[i].style.color = "";
         inputs[i].innerHTML = letter;
-        // if (randomString.includes(letter)) {
-        //   let color =
-        //     regex.exec(randomString).index === i ? "goldenrod" : "green";
-        //   inputs[i].style.color = color;
-        //   inputs[i].innerHTML = letter;
-        //   inputs[i].dataset.value = letter;
-        //   color === "goldenrod" && (userCorrectSelect[i] = letter);
-        // } else {
-        //   inputs[i].innerHTML = letter;
-        //   inputs[i].dataset.value = letter;
-        //   inputs[i].style.color = "";
-        // }
         userSelects.push(letter);
         break;
       }
     }
-
     if (userSelects.length === 5) {
-      // userSelects = [];
-      // let selects = [...userSelects];
-
-
       let guessList = "";
       let color = "";
       for (let i = 0; i < userSelects.length; i++) {
@@ -129,16 +103,6 @@ function setInput(letter) {
           guessList += `<span>${userSelects[i]}</span>&nbsp;`;
         }
       }
-
-
-
-      // let guessList = "";
-      // for (let i = 0; i < inputs.length; i++) {
-      //   guessList += `<span style="color :${inputs[i].style.color}"}>${inputs[i].dataset.value}</span>&nbsp;`;
-      // }
-
-
-      // userSelects = Array(5).fill("");
       userGuess.lastElementChild.innerHTML += `<li>${guessList}</li>`;
       Player = "computer";
       let endUserGame = checkWord();
@@ -150,38 +114,10 @@ function setInput(letter) {
     }
 
   }
-  // function userTurn() {
-  //   for (let i = 0; i < userSelects.length; i++) {
-  //     if (userSelects[i] === "") {
-  //       userSelects[i] = letter;
-  //       inputs[i].innerHTML = userSelects[i];
-  //       break;
-  //     }
-  //   }
-  //   let word = userSelects.join("");
-  //   if (word.length >= 5) {
-  //     userGuess.lastElementChild.innerHTML += `<li class="user-guesse">${word}</li>`;
-  //     let endUserGame = checkWord();
-  //     Player = "computer";
-  //     console.log(endUserGame)
-  //     endUserGame &&
-  //       setTimeout(() => {
-  //         computerTurn();
-  //       }, 2000);
-  //   }
-  // }
 }
 
 // -------------------- Checks if the inputs match the pattern ----------------- //
 function checkWord() {
-  let selects = [...userSelects];
-  // userSelects = Array(5).fill("");
-  // for (let i = 0; i < randomString.length; i++) {
-  //   if (selects.includes(randomString[i])) {
-  //     userSelects[i] = randomString[i];
-  //   }
-  // }
-  console.log(userCorrectSelect.join(""));
   if (userCorrectSelect.join("") === randomString) {
     setTimeout(() => {
       winnerMessage.style.height = "200px";
