@@ -1,5 +1,6 @@
 import { randomWord, disabledKeys, setGameLevel } from "./data/utilitys.js";
 
+const deleteButton = document.getElementById("delete");
 const Keys = Array.from(document.querySelectorAll(".keys"));
 const inputs = Array.from(document.querySelectorAll(".input"));
 const userGuess = document.getElementById("userGuess");
@@ -11,8 +12,9 @@ const winnerMessage = document.getElementById("winner-message");
 let Player = "user";
 let randomString = "";
 let recordCorrectLetter = 0;
-let userSelects = new Array(5).fill("");
-let computerSelects = [""];
+let userSelects = [];
+let userCorrectSelect = new Array(5).fill("");
+let computerSelects = [];
 let GAME_LEVEL = "";
 let computerIncorrect = [];
 let computerCorrect = [];
@@ -44,10 +46,39 @@ Keys.forEach((key) => {
   });
 });
 
+// ---------------- Set Click Handler For Delete Key ------------------------- //
+deleteButton.addEventListener("click", (e) => {
+  deleteButton.classList.add("keysAnime");
+  setTimeout(() => {
+    deleteButton.classList.remove("keysAnime");
+  }, 200);
+  let i = inputs.length;
+  while (i >= 0) {
+    i--;
+    if (inputs[i - 1].dataset.value !== "") {
+      console.log(inputs[i - 1]);
+      inputs[i - 1].innerHTML = "";
+      inputs[i - 1].dataset.value = "";
+      userSelects.pop();
+      break;
+    }
+  }
+});
+
 // ---------------- Reset Inputs ------------------------------ //
 function fillInput() {
-  for (let i = 0; i < userSelects.length; i++) {
-    inputs[i].innerHTML = `<span style="color:green">${userSelects[i]}</span>`;
+  // for (let i = 0; i < userCorrectSelect.length; i++) {
+  //   inputs[i].style.color = "";
+  //   inputs[i].dataset.value = "";
+  //   inputs[i].innerHTML = userCorrectSelect[i];
+  //   userCorrectSelect[i] !== "" &&
+  //     (inputs[i].style.color = "rgba(217, 164, 31,0.3)");
+  // }
+  for(let i=0 ; i < inputs.length ; i++){
+    inputs[i].dataset.value = "";
+    inputs[i].style.color = "";
+    inputs[i].innerHTML = userCorrectSelect[i];
+    userCorrectSelect[i] !== "" && (inputs[i].style.color = "rgba(217, 164, 31,0.3)");
   }
 }
 
@@ -55,57 +86,127 @@ function fillInput() {
 
 function setInput(letter) {
   Player === "user" && userTurn();
+
   function userTurn() {
-    for (let i = 0; i < userSelects.length; i++) {
-      if (userSelects[i] === "") {
-        userSelects[i] = letter;
-        inputs[i].innerHTML = userSelects[i];
+    // let regex = new RegExp(letter, "ig");
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].dataset.value === "") {
+        inputs[i].dataset.value = letter;
+        inputs[i].style.color = "";
+        inputs[i].innerHTML = letter;
+        // if (randomString.includes(letter)) {
+        //   let color =
+        //     regex.exec(randomString).index === i ? "goldenrod" : "green";
+        //   inputs[i].style.color = color;
+        //   inputs[i].innerHTML = letter;
+        //   inputs[i].dataset.value = letter;
+        //   color === "goldenrod" && (userCorrectSelect[i] = letter);
+        // } else {
+        //   inputs[i].innerHTML = letter;
+        //   inputs[i].dataset.value = letter;
+        //   inputs[i].style.color = "";
+        // }
+        userSelects.push(letter);
         break;
       }
     }
-    let word = userSelects.join("");
-    if (word.length >= 5) {
-      userGuess.lastElementChild.innerHTML += `<li class="user-guesse">${word}</li>`;
-      let endUserGame = checkWord();
+
+    if (userSelects.length === 5) {
+      // userSelects = [];
+      // let selects = [...userSelects];
+
+
+      let guessList = "";
+      let color = "";
+      for (let i = 0; i < userSelects.length; i++) {
+        if (randomString.includes(userSelects[i])) {
+            color = userSelects[i] === randomString[i] ? "goldenrod" : "green";
+            guessList += `<span style="color :${color}"}>${userSelects[i]}</span>&nbsp;`;
+            if(userSelects[i] === randomString[i]){
+              userCorrectSelect[i] = randomString[i];
+            }
+        }else{
+          guessList += `<span>${userSelects[i]}</span>&nbsp;`;
+        }
+      }
+
+
+
+      // let guessList = "";
+      // for (let i = 0; i < inputs.length; i++) {
+      //   guessList += `<span style="color :${inputs[i].style.color}"}>${inputs[i].dataset.value}</span>&nbsp;`;
+      // }
+
+
+      // userSelects = Array(5).fill("");
+      userGuess.lastElementChild.innerHTML += `<li>${guessList}</li>`;
       Player = "computer";
-      endUserGame ||
+      let endUserGame = checkWord();
+      endUserGame &&
         setTimeout(() => {
           computerTurn();
         }, 2000);
+        userSelects = [];
     }
+
   }
+  // function userTurn() {
+  //   for (let i = 0; i < userSelects.length; i++) {
+  //     if (userSelects[i] === "") {
+  //       userSelects[i] = letter;
+  //       inputs[i].innerHTML = userSelects[i];
+  //       break;
+  //     }
+  //   }
+  //   let word = userSelects.join("");
+  //   if (word.length >= 5) {
+  //     userGuess.lastElementChild.innerHTML += `<li class="user-guesse">${word}</li>`;
+  //     let endUserGame = checkWord();
+  //     Player = "computer";
+  //     console.log(endUserGame)
+  //     endUserGame &&
+  //       setTimeout(() => {
+  //         computerTurn();
+  //       }, 2000);
+  //   }
+  // }
 }
 
 // -------------------- Checks if the inputs match the pattern ----------------- //
 function checkWord() {
   let selects = [...userSelects];
-  userSelects = Array(5).fill("");
-  for (let i = 0; i < randomString.length; i++) {
-    if (selects.includes(randomString[i])) {
-      userSelects[i] = randomString[i];
-    }
-  }
-  if (userSelects.join("") === randomString) {
-    winnerMessage.style.height = "200px";
-    winnerMessage.style.padding = "80px 10px 80px 10px";
-    winnerMessage.firstElementChild.innerHTML = "CONGRATULATIONS YOU WON";
-    winnerMessage.lastElementChild.innerHTML = `PASSWORD IS : ${randomString}`;
-    winnerModal.style.height = "100%";
+  // userSelects = Array(5).fill("");
+  // for (let i = 0; i < randomString.length; i++) {
+  //   if (selects.includes(randomString[i])) {
+  //     userSelects[i] = randomString[i];
+  //   }
+  // }
+  console.log(userCorrectSelect.join(""));
+  if (userCorrectSelect.join("") === randomString) {
+    setTimeout(() => {
+      winnerMessage.style.height = "200px";
+      winnerMessage.style.padding = "80px 10px 80px 10px";
+      winnerMessage.firstElementChild.innerHTML = "CONGRATULATIONS YOU WON";
+      winnerMessage.lastElementChild.innerHTML = `PASSWORD IS : ${randomString}`;
+      winnerModal.style.height = "100%";
+    }, 1200);
     setTimeout(() => {
       location.reload();
     }, 3500);
+    return false;
   } else {
     setTimeout(() => {
       fillInput();
       disabledKeys();
     }, 500);
-    return false;
+    return true;
   }
 }
 
 // ----------------- Computer Start Game -------------- //
 
 function computerTurn() {
+  console.log("computer");
   let selectWord;
   switch (GAME_LEVEL) {
     case "EASY":

@@ -56,6 +56,21 @@ main{
     transition: 0.3s;
     padding: 10px 1px 0 1px;
     border-radius: 8px;
+    cursor: pointer;
+}
+#delete{
+    display: inline-block;
+    background: lightcoral;
+    color : white;
+    margin: 4px 0px;
+    width: 70px;
+    height: 24px;
+    text-align: center;
+    text-align: center;
+    transition: 0.3s;
+    padding: 10px 1px 0 1px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 .blureKeys{
     filter: blur(1px);
@@ -96,9 +111,7 @@ li{
     padding: 8px 0;
     border-top: 1px solid sandybrown;
 }
-.user-guesse{
-    color : mediumseagreen
-}
+
 .computer-guesse{
     color : red
 }
