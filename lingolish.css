@@ -15,19 +15,19 @@ main{
 }
 .main-cover{
     position: absolute;
-    background: rgba(0,0,0,0.6);
+    background: rgba(48, 40, 40, 0.6);
     z-index: 1;
     padding: 20px;
     top: -30px;
-    bottom: 0;
     left: 0;
     right: 0;
     transition: 0.4s;
+    height: 100vh;
 }
 .main-cover h4{
     text-align: center;
     margin: 30px auto;
-    color: #fff;
+    color: ghostwhite;
     font-size: xx-large;
     word-spacing: 5px;
     letter-spacing: 4px;

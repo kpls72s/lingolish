@@ -212,7 +212,7 @@ function normalGame() {
         countIncorrect +=
           computerIncorrect.indexOf(selectItem[j]) !== -1 ? 1 : 0;
       }
-      if (countEqual === computerCorrect.length && countIncorrect < 2) {
+      if (countEqual === computerCorrect.length && countIncorrect < 3) {
         condition = false;
       } else {
         condition = true;
@@ -265,7 +265,7 @@ function hardGame() {
           computerIncorrect.indexOf(selectItem[j]) !== -1 ? 1 : 0;
       }
 
-      if (countEqual === count && countIncorrect <= 1) {
+      if (countEqual === count && countIncorrect <= 2) {
         condition = false;
       } else {
         condition = true;
